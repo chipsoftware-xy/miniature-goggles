@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html { scroll-behavior: smooth; }
+body { @apply font-sans text-ink bg-white antialiased; }
+h1, h2, h3 { @apply font-display; }
+:focus-visible { outline: 3px solid #F28C28; outline-offset: 2px; }
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 font-semibold transition-colors; }
+.btn-primary { @apply bg-saffron text-ink hover:bg-orange-400; }
+.btn-dark { @apply bg-ink text-white hover:bg-panel; }
+.btn-ghost { @apply border border-white/40 text-white hover:bg-white/10; }
+.btn-line { @apply border border-ink/20 hover:border-ink; }
+.field { @apply w-full rounded-md border border-ink/20 bg-white px-3 py-2.5 focus:border-saffron; }
+.wrap { @apply mx-auto max-w-7xl px-4 sm:px-6; }
+.section { @apply py-16 md:py-24; }
+/* LED pixel-grid motif: the one signature element */
+.led-grid { background-image: radial-gradient(circle, rgba(255,255,255,.9) 1.3px, transparent 1.6px); background-size: 14px 14px; }
+@keyframes scan { from { background-position: 0 0; } to { background-position: 280px 0; } }
+.led-scan { background: linear-gradient(90deg, transparent, #F28C28 30%, #fff 50%, #138808 70%, transparent); background-size: 280px 100%; animation: scan 6s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .led-scan { animation: none; } html { scroll-behavior: auto; } }
