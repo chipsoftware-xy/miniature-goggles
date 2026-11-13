@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 export default function Seo({ title, description }) {
   useEffect(() => {
-    document.title = `${title} | XYZ`
+    document.title = `${title} | KalpLabs`
     let m = document.querySelector('meta[name="description"]')
     if (!m) { m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m) }
     m.content = description

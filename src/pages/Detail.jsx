@@ -74,7 +74,7 @@ export default function Detail({ items, base }) {
 Detail.List = function List({ items, title, base }) {
   return (
     <>
-      <Seo title={title} description={`${title} from XYZ.`} />
+      <Seo title={title} description={`${title} from KalpLabs.`} />
       <section className="wrap section">
         <h1 className="text-4xl font-extrabold">{title}</h1>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

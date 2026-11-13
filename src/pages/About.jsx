@@ -11,8 +11,8 @@ const blocks = [
 export default function About() {
   return (
     <>
-      <Seo title="About Us" description="Learn about XYZ, an Indian LED and LCD display company." />
-      <section className="bg-ink py-16 text-white"><div className="wrap"><h1 className="text-4xl font-extrabold sm:text-5xl">About XYZ</h1></div></section>
+      <Seo title="About Us" description="Learn about KalpLabs, an Indian LED and LCD display company." />
+      <section className="bg-ink py-16 text-white"><div className="wrap"><h1 className="text-4xl font-extrabold sm:text-5xl">About KalpLabs</h1></div></section>
       <section className="wrap section grid gap-10 md:grid-cols-2">
         {blocks.map(([t, d]) => <div key={t}><h2 className="text-2xl font-bold">{t}</h2><p className="mt-2 text-ink/75">{d}</p></div>)}
       </section>

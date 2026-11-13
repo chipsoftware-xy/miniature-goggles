@@ -1,4 +1,4 @@
-# XYZ Display Website (React + Vite + Tailwind)
+# KalpLabs Display Website (React + Vite + Tailwind)
 
 ## Run locally
     npm install

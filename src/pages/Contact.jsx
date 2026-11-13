@@ -7,7 +7,7 @@ export default function Contact() {
   const [sp] = useSearchParams()
   return (
     <section className="wrap section grid gap-12 lg:grid-cols-5">
-      <Seo title="Contact Us" description="Contact XYZ for a quote on LED and LCD displays." />
+      <Seo title="Contact Us" description="Contact KalpLabs for a quote on LED and LCD displays." />
       <div className="lg:col-span-3">
         <h1 className="text-4xl font-extrabold">Contact Us</h1>
         <p className="mb-6 mt-2 text-ink/70">Tell us about your project and we will get back to you.</p>

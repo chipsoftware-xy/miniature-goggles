@@ -28,7 +28,7 @@ export default function Header() {
       <div className="h-1 led-scan" aria-hidden />
       <div className="wrap flex h-16 items-center justify-between">
         <Link to="/" className="font-display text-2xl font-extrabold tracking-tight" onClick={close}>
-          XYZ<span className="ml-1 text-sm font-medium text-india">Displays</span>
+          KalpLabs<span className="ml-1 text-sm font-medium text-india">Displays</span>
         </Link>
         <nav className="hidden items-center lg:flex" aria-label="Main">
           <NavLink to="/" end className="px-3 py-2 font-medium hover:text-saffron">Home</NavLink>

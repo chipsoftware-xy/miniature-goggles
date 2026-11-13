@@ -34,7 +34,7 @@ export function ProductCard({ p, base = '/products' }) {
 export default function Home() {
   return (
     <>
-      <Seo title="LED & LCD Display Solutions" description="XYZ: Indian LED and LCD display solutions for businesses, industries and public spaces." />
+      <Seo title="LED & LCD Display Solutions" description="KalpLabs: Indian LED and LCD display solutions for businesses, industries and public spaces." />
       <section className="relative overflow-hidden bg-ink text-white">
         <div className="led-grid absolute inset-0 opacity-[0.12]" aria-hidden />
         <div className="absolute inset-x-0 bottom-0 flex h-2" aria-hidden>
@@ -58,7 +58,7 @@ export default function Home() {
           <img src={img('Indian engineering illustration (placeholder)', 800, 560)} alt="Engineering illustration placeholder" className="rounded-lg" loading="lazy" />
           <div>
             <h2 className="text-3xl font-bold sm:text-4xl">Proudly Indian. Engineered for Excellence.</h2>
-            <p className="mt-4 text-ink/75">XYZ is committed to Indian manufacturing, consistent quality and continuous innovation. We tailor every display to the project and stand behind it with dependable after-sales service.</p>
+            <p className="mt-4 text-ink/75">KalpLabs is committed to Indian manufacturing, consistent quality and continuous innovation. We tailor every display to the project and stand behind it with dependable after-sales service.</p>
             <p className="mt-3 text-sm text-ink/50">[Placeholder copy. Add verified facts about your manufacturing before publishing.]</p>
             <div className="mt-6 flex h-1.5 w-40 overflow-hidden rounded" aria-hidden><i className="flex-1 bg-saffron" /><i className="flex-1 bg-ink/10" /><i className="flex-1 bg-india" /></div>
           </div>
@@ -90,7 +90,7 @@ export default function Home() {
 
       <section className="section bg-ink text-white">
         <div className="wrap">
-          <h2 className="text-3xl font-bold sm:text-4xl">Why Choose XYZ?</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Why Choose KalpLabs?</h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {why.map(([Icon, t, d]) => (
               <div key={t} className="flex gap-4"><Icon className="mt-1 shrink-0 text-saffron" /><div><h3 className="font-bold">{t}</h3><p className="text-white/70">{d}</p></div></div>

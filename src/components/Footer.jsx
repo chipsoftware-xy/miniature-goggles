@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-ink pb-24 pt-14 text-white/80 lg:pb-14">
       <div className="wrap grid gap-10 md:grid-cols-3">
         <div>
-          <p className="font-display text-2xl font-extrabold text-white">XYZ</p>
+          <p className="font-display text-2xl font-extrabold text-white">KalpLabs</p>
           <p className="mt-3 max-w-xs">Indian LED &amp; LCD display solutions: manufacturing, supply, installation and service.</p>
         </div>
         <div>
@@ -20,7 +20,7 @@ export default function Footer() {
           <p><a className="hover:text-saffron" href={`tel:${COMPANY.mobile}`}>{COMPANY.mobile}</a></p>
         </div>
       </div>
-      <p className="wrap mt-10 border-t border-white/10 pt-6 text-sm">© {new Date().getFullYear()} XYZ. All rights reserved.</p>
+      <p className="wrap mt-10 border-t border-white/10 pt-6 text-sm">© {new Date().getFullYear()} KalpLabs. All rights reserved.</p>
     </footer>
   )
 }
