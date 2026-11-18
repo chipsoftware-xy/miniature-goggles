@@ -1,89 +1,119 @@
 import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
 import Seo from '../components/Seo.jsx'
 import QuoteForm from '../components/QuoteForm.jsx'
-import { faqs, products, industries } from '../data.js'
-import { img } from '../config.js'
+import ScreenVisual from '../components/ScreenVisual.jsx'
+import PageHero from '../components/PageHero.jsx'
+import { ProductCard, IndustryCard, Faq } from '../components/Cards.jsx'
+import { Reveal, Tilt } from '../components/fx.jsx'
+import { faqs } from '../data.js'
 
-const specs = [['Pixel pitch', '[placeholder]'], ['Brightness', '[placeholder]'], ['Screen size', '[placeholder]'], ['Refresh rate', '[placeholder]'], ['Ingress protection', '[placeholder]'], ['Warranty', '[placeholder]']]
-
-function Faq({ q, a }) {
-  const [o, setO] = useState(false)
-  return (
-    <div className="border-b border-ink/10">
-      <button className="flex w-full items-center justify-between py-4 text-left font-semibold" aria-expanded={o} onClick={() => setO(!o)}>{q}<ChevronDown className={o ? 'rotate-180' : ''} size={18} /></button>
-      {o && <p className="pb-4 text-ink/70">{a}</p>}
-    </div>
-  )
+const BENEFITS = {
+  product: ['Matched to your viewing distance and site', 'Professional survey, installation and calibration', 'Training and after-sales support'],
+  industry: ['Displays chosen for your environment and hours of use', 'Content-ready setup with suitable controllers', 'One team from site survey to service']
 }
 
 export default function Detail({ items, base }) {
   const { slug } = useParams()
   const item = items.find(i => i.slug === slug)
-  if (!item) return <div className="wrap section"><h1 className="text-3xl font-bold">Not found</h1><Link className="btn btn-primary mt-4" to={base}>View all</Link></div>
+  if (!item) return <PageHero title="Not found"><Link className="btn btn-primary mt-6" to={base}>View all</Link></PageHero>
   const isProduct = item.type === 'product'
-  const related = items.filter(i => i.slug !== slug).slice(0, 3)
+  const related = items.filter(i => i.slug !== slug).slice(0, 4)
+  const list = isProduct ? ['/products', 'Products'] : ['/services', 'Solutions']
+
   return (
     <>
       <Seo title={item.title} description={item.blurb} />
-      <section className="bg-ink text-white">
-        <div className="wrap grid items-center gap-8 py-14 lg:grid-cols-2">
+      <section className="relative overflow-hidden pb-16 pt-28">
+        <div className="absolute inset-0 opacity-30 blur-3xl" aria-hidden><ScreenVisual scene={item.scene} bezel={false} ratio="h-full" className="h-full" /></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/80 to-ink" aria-hidden />
+        <div className="wrap relative grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="text-saffron">{isProduct ? 'Our Products' : 'Services by Industry'}</p>
-            <h1 className="mt-2 text-4xl font-extrabold sm:text-5xl">{item.title}</h1>
-            <p className="mt-4 text-lg text-white/80">{item.blurb}</p>
-            <a href="#quote" className="btn btn-primary mt-6">Request a Quote</a>
+            <nav aria-label="Breadcrumb" className="mb-6 flex gap-2 font-mono text-xs text-white/40"><Link to="/" className="hover:text-saffron">Home</Link>/<Link to={list[0]} className="hover:text-saffron">{list[1]}</Link></nav>
+            <p className="eyebrow">{isProduct ? 'Product' : 'Industry solution'}</p>
+            <h1 className="mt-3 text-4xl font-extrabold leading-tight sm:text-6xl">{item.title}</h1>
+            <p className="mt-5 text-xl text-white/70">{item.blurb}</p>
+            <ul className="mt-6 space-y-2">{BENEFITS[item.type].map(b => <li key={b} className="flex gap-2 text-white/75"><Check size={20} className="shrink-0 text-india" />{b}</li>)}</ul>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#quote" className="btn btn-primary">Request a quote <ArrowRight size={18} /></a>
+              <Link to="/calculator" className="btn btn-ghost">Size my screen</Link>
+            </div>
           </div>
-          <img src={img(item.title + ' (placeholder)', 800, 500)} alt={`${item.title} placeholder`} className="rounded-lg" />
+          <Tilt max={8} className="rounded-xl"><ScreenVisual scene={item.scene} label={item.title} className="shadow-[0_0_120px_-20px_rgba(242,140,40,.5)]" /></Tilt>
         </div>
       </section>
-      <section className="section">
+
+      <section className="section pt-10">
         <div className="wrap grid gap-12 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold">Overview and key benefits</h2>
-            <p className="mt-3 text-ink/75">[Placeholder overview. Describe this {isProduct ? 'product category' : 'industry solution'} in your own words.]</p>
-            <ul className="mt-4 list-disc space-y-1 pl-5 text-ink/75"><li>[Benefit one]</li><li>[Benefit two]</li><li>[Benefit three]</li></ul>
-            <h2 className="mt-10 text-2xl font-bold">Applications</h2>
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-ink/75"><li>[Application one]</li><li>[Application two]</li><li>[Application three]</li></ul>
-            {isProduct && (<>
-              <h2 className="mt-10 text-2xl font-bold">Specifications <span className="text-base font-normal text-ink/50">(placeholders, not real data)</span></h2>
-              <table className="mt-3 w-full text-left"><tbody>{specs.map(([k, v]) => <tr key={k} className="border-b border-ink/10"><th className="w-1/2 py-2 font-medium">{k}</th><td className="text-ink/60">{v}</td></tr>)}</tbody></table>
-            </>)}
-            <h2 className="mt-10 text-2xl font-bold">Gallery</h2>
-            <div className="mt-3 grid grid-cols-2 gap-3">{[1, 2].map(n => <img key={n} loading="lazy" src={img(`Gallery ${n}`, 600, 400)} alt={`Gallery placeholder ${n}`} className="rounded-lg" />)}</div>
-            <h2 className="mt-10 text-2xl font-bold">FAQs</h2>
-            <div className="mt-2">{faqs.map(([q, a]) => <Faq key={q} q={q} a={a} />)}</div>
+          <div className="space-y-16 lg:col-span-2">
+            {item.apps?.length > 0 && (
+              <Reveal>
+                <h2 className="text-3xl font-bold">Where it works best</h2>
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                  {item.apps.map((a, i) => (
+                    <div key={a} className="card p-5"><span className="font-mono text-xs text-saffron">0{i + 1}</span><p className="mt-2 font-semibold text-white">{a}</p></div>
+                  ))}
+                </div>
+              </Reveal>
+            )}
+            {isProduct && (
+              <Reveal>
+                <h2 className="text-3xl font-bold">Specifications</h2>
+                <p className="mt-2 text-sm text-white/40">Exact figures vary by model. Ask us for the full datasheet.</p>
+                <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
+                  {item.specs.map(([k, v]) => (
+                    <div key={k} className="flex items-center justify-between bg-panel px-5 py-4"><dt className="text-white/55">{k}</dt><dd className="font-mono text-white">{v}</dd></div>
+                  ))}
+                </dl>
+              </Reveal>
+            )}
+            <Reveal>
+              <h2 className="text-3xl font-bold">FAQs</h2>
+              <div className="mt-4">{faqs.map(([q, a]) => <Faq key={q} q={q} a={a} />)}</div>
+            </Reveal>
           </div>
-          <aside id="quote" className="h-fit rounded-lg border border-ink/10 bg-mist p-6 lg:sticky lg:top-24">
-            <h2 className="mb-4 text-xl font-bold">Request a Quote</h2>
+          <aside id="quote" className="card h-fit scroll-mt-24 p-6 lg:sticky lg:top-24">
+            <h2 className="mb-1 text-2xl font-bold">Request a quote</h2>
+            <p className="mb-5 text-sm text-white/50">For {item.title.toLowerCase()}</p>
             <QuoteForm defaultInterest={item.title} />
           </aside>
         </div>
       </section>
-      <section className="section bg-mist">
+
+      <section className="section bg-panel/40">
         <div className="wrap">
-          <h2 className="text-2xl font-bold">Related {isProduct ? 'products' : 'solutions'}</h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">{related.map(r => <Link key={r.slug} to={`${base}/${r.slug}`} className="rounded-lg bg-white p-5 hover:shadow-md"><h3 className="font-bold">{r.title}</h3><p className="mt-1 text-sm text-ink/70">{r.blurb}</p></Link>)}</div>
+          <h2 className="text-3xl font-bold">Related {isProduct ? 'products' : 'solutions'}</h2>
+          <div className="mt-8 grid grid-cols-2 gap-5 lg:grid-cols-4">
+            {related.map(r => isProduct ? <ProductCard key={r.slug} p={r} base={base} /> : <IndustryCard key={r.slug} i={r} />)}
+          </div>
         </div>
       </section>
     </>
   )
 }
 
-Detail.List = function List({ items, title, base }) {
+const FILTERS = [['all', 'All'], ['indoor', 'Indoor'], ['outdoor', 'Outdoor'], ['special', 'Special']]
+
+Detail.List = function List({ items, title, base, sub }) {
+  const [f, setF] = useState('all')
+  const isProduct = items[0]?.type === 'product'
+  const shown = items.filter(p => f === 'all' || p.env === f)
   return (
     <>
       <Seo title={title} description={`${title} from KalpLabs.`} />
-      <section className="wrap section">
-        <h1 className="text-4xl font-extrabold">{title}</h1>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map(p => (
-            <Link key={p.slug} to={`${base}/${p.slug}`} className="rounded-lg border border-ink/10 p-5 hover:border-saffron">
-              <img src={img(p.title, 500, 320)} alt="" loading="lazy" className="mb-3 rounded" />
-              <h2 className="text-lg font-bold">{p.title}</h2><p className="mt-1 text-sm text-ink/70">{p.blurb}</p>
-            </Link>
-          ))}
+      <PageHero eyebrow={isProduct ? 'Catalogue' : 'By industry'} title={title} sub={sub} crumbs={[['/', 'Home']]}>
+        {isProduct && (
+          <div className="mt-8 flex flex-wrap gap-2">
+            {FILTERS.map(([k, l]) => (
+              <button key={k} onClick={() => setF(k)} className={`rounded-full border px-4 py-2 text-sm transition ${f === k ? 'border-saffron bg-saffron text-ink' : 'border-white/15 text-white/70 hover:border-white/40'}`}>{l}</button>
+            ))}
+          </div>
+        )}
+      </PageHero>
+      <section className="wrap section pt-12">
+        <div className={`grid gap-6 ${isProduct ? 'sm:grid-cols-2 lg:grid-cols-4' : 'grid-cols-2 lg:grid-cols-4'}`}>
+          {shown.map((p, i) => <Reveal key={p.slug} delay={(i % 4) * 80} className="h-full">{isProduct ? <ProductCard p={p} base={base} /> : <IndustryCard i={p} />}</Reveal>)}
         </div>
       </section>
     </>
